@@ -1,10 +1,10 @@
-NAME	= gnl
+NAME	= gnl.out
 ODIR	= ./bin
 SDIR	= ./src
 SRCS	= $(SDIR)/get_next_line.c $(SDIR)/get_next_line_utils.c
 OBJS	= $(patsubst $(SDIR)/%.c, $(ODIR)/%.o, $(SRCS))
 DEPS	= $(addsuffix .d, $(basename $(OBJS)))
-CFLAGS	= -Wall -Wextra -Werror -g $(BSIZE)
+CFLAGS	= -Wall -Wextra -Werror -g
 BSIZE	= -D BUFFER_SIZE=42
 RM		= rm -rf
 CC		= gcc 
@@ -15,7 +15,7 @@ $(NAME): $(OBJS)
 
 $(ODIR)/%.o: $(SDIR)/%.c
 	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c -o $@ $< -MMD
+	$(CC) $(CFLAGS) $(BSIZE) -c -o $@ $< -MMD
 
 -include $(DEPS)
 .PHONY: clean
