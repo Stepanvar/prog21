@@ -1,27 +1,31 @@
-NAME	= libft
+NAME	= project.out
 ODIR	= ./bin
 SDIR	= ./src
 SRCS	= $(shell find $(SDIR) -name '*.c')
-OBJS	= $(patsubst $(SDIR)/%.c, $(ODIR)/%.o, $(SRCS))
-DEPS	= $(addsuffix .d, $(basename $(OBJS)))
+OBJS	= $(patsubst $(ODIR)/%.c, $(ODIR)/%.o, $(SRCS))
+DEPS	= $(addsuffix .d, $(basename $(OBJS))
 CFLAGS	= -Wall -Wextra -Werror -g $(AFL)
+CC		= gcc
 RM		= rm -rf
-CC		= gcc 
+
 .PHONY: all
 all: $(NAME)
+
 $(NAME): $(OBJS)
-	ar rcs $(NAME) $?
+	$(CC) $(CFLAGS) -o $@ $^
 
 $(ODIR)/%.o: $(SDIR)/%.c
-	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c -o $@ $< -MMD
+	$(CC) $(CFLAGS) -c -o $@ $< -MMD -MP
 
 -include $(DEPS)
 .PHONY: clean
 clean:
 	$(RM) $(NAME)
+
 .PHONY: fclean
 fclean: clean
-	$(RM) $(OBJS) $(DEPS)
+	$(RM) $(ODIR)
+
 .PHONY: re
 re: fclean all
+
