@@ -6,7 +6,7 @@
 /*   By: ccurie <ccurie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 12:15:58 by ccurie            #+#    #+#             */
-/*   Updated: 2022/01/09 16:53:14 by ccurie           ###   ########.fr       */
+/*   Updated: 2022/01/09 19:24:25 by ccurie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,29 @@ char	*ft_onesplit(char *str, char c)
 char	*get_next_line(int fd)
 {
 	int			size;
-	static char	*buf = "\0";
+	static char	*buf = NULL;
 	char		*str;
-	int			i;
 
-	i = 0;
 	size = 0;
-	if (!(*buf))
+	if (!buf)
 	{
-		buf = (char *)malloc(BUFFER_SIZE + 1);
-		size = read(fd, buf, BUFFER_SIZE);
-		buf[size] = '\0';
+		buf = (char *)malloc(BUFFER_SIZE + 2);
+		buf[0] = '\0';
+		size = read(fd, (++buf), BUFFER_SIZE);
+		buf[size + 1] = '\0';
 	}
 	str = ft_substr(buf, 0, ft_strchr(buf, '\n') - buf + 1);
 	buf += ft_strlen(str);
+	if ((0 == size && str[ft_strlen(str) - 1] != '\n'))
+	{
+		while (*(buf - 1))
+			buf--;
+		free(--buf);
+		buf = NULL;
+		if (!*str)
+			return (NULL);
+		return (str);
+	}
 	return (str);
 }
 
@@ -59,10 +68,12 @@ char	*get_next_line(int fd)
 // 		return (-1);
 // 	str = get_next_line(fd);
 // 	printf("%s", str);
-// 	while (*str)
+// 	free(str);
+// 	while (str)
 // 	{
 // 		str = get_next_line(fd);
 // 		printf("%s", str);
+// 		free(str);
 // 		i++;
 // 	}
 // 	close(fd);

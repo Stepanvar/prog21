@@ -6,7 +6,7 @@
 /*   By: ccurie <ccurie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 12:15:58 by ccurie            #+#    #+#             */
-/*   Updated: 2022/01/09 18:25:32 by ccurie           ###   ########.fr       */
+/*   Updated: 2022/01/09 20:00:16 by ccurie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,7 @@ char	*get_next_line(int fd)
 	int			size;
 	static char	*buf = NULL;
 	char		*str;
-	int			i;
 
-	i = 0;
 	size = 0;
 	if (!buf)
 	{
@@ -40,14 +38,17 @@ char	*get_next_line(int fd)
 		size = read(fd, (++buf), BUFFER_SIZE);
 		buf[size + 1] = '\0';
 	}
-	str = ft_substr(buf, 0, ft_strchr(buf, '\n') - buf + 1);
+	str = ft_substr(buf, 0, ft_strchr(buf, '\n') - buf);
 	buf += ft_strlen(str);
-	if ((BUFFER_SIZE == size && !*buf) || (0 == size && !*str))
+	if ((0 == size && str[ft_strlen(str) - 1] != '\n'))
 	{
 		while (*(buf - 1))
 			buf--;
 		free(--buf);
-		return (buf);
+		buf = NULL;
+		if (!*str)
+			return (NULL);
+		return (str);
 	}
 	return (str);
 }
