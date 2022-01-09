@@ -6,7 +6,7 @@
 /*   By: ccurie <ccurie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 20:22:43 by ccurie            #+#    #+#             */
-/*   Updated: 2022/01/08 22:46:49 by ccurie           ###   ########.fr       */
+/*   Updated: 2022/01/09 13:15:33 by ccurie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,15 @@ int	ft_handle_arg(va_list ap, int len, const char *str)
 		if (*str == '%' && *(str + 1))
 		{
 			if (*(str + 1) == '%')
-				write(1, "%", 1);
-			res = va_arg(ap, void *);
-			i = ft_num_func(*(str + 1), arg);
-			len = fmass[i](res, len);
-			str += 2;
-			continue ;
+				str++;
+			else
+			{
+				res = va_arg(ap, void *);
+				i = ft_num_func(*(str + 1), arg);
+				len = fmass[i](res, len);
+				str += 2;
+				continue ;
+			}
 		}
 		len += write(1, str, 1);
 		str++;

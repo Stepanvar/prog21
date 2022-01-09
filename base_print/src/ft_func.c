@@ -6,7 +6,7 @@
 /*   By: ccurie <ccurie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 21:22:54 by ccurie            #+#    #+#             */
-/*   Updated: 2022/01/08 23:13:59 by ccurie           ###   ########.fr       */
+/*   Updated: 2022/01/09 12:52:13 by ccurie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,21 @@ int	hs(void *res, int len)
 	return (len);
 }
 
+int	ft_put_addr(unsigned long num, int len, char *base)
+{
+	if (num >= 16)
+		len = ft_put_addr(num / 16, len, base);
+	len += ft_putchar(base[num % 16]);
+	return (len);
+}
+
 int	hp(void *res, int len)
 {
-	return (0);
+	unsigned long	num;
+
+	num = (unsigned long) res;
+	len += write(1, "0x", 2);
+	return (ft_put_addr(num, len, "0123456789abcdef"));
 }
 
 int	ft_putnbr(int num, int len)
