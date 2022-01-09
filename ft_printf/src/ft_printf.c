@@ -6,7 +6,7 @@
 /*   By: ccurie <ccurie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 12:46:11 by ccurie            #+#    #+#             */
-/*   Updated: 2022/01/06 12:48:03 by ccurie           ###   ########.fr       */
+/*   Updated: 2022/01/08 20:11:31 by ccurie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,7 +203,7 @@ t_s	ft_handle_flag(t_s s)
 	return (s);
 }
 
-void	ft_handling_justif(t_s s, char *str) //real string
+void	ft_handling_justif(t_s s, char *str)
 {
 	printf("%d", s.minus);
 	if (s.minus == 1)

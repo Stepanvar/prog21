@@ -4,8 +4,7 @@ SDIR	= ./src
 SRCS	= $(shell find $(SDIR) -name '*.c')
 OBJS	= $(patsubst $(SDIR)/%.c, $(ODIR)/%.o, $(SRCS))
 DEPS	= $(addsuffix .d, $(basename $(OBJS)))
-CFLAGS	= -Wall -Wextra -Werror -g $(BSIZE)
-BSIZE	= -D BUFFER_SIZE=42
+CFLAGS	= -Wall -Wextra -g $(AFL)
 RM		= rm -rf
 CC		= gcc 
 .PHONY: all

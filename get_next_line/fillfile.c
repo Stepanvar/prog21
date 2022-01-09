@@ -33,7 +33,7 @@ int	main(void)
 	i = 0;
 	fd = 0;
 	j = 0;
-	srand(time(0));
+	srand(time(NULL));
 	//if (ft_checkargc(argc))
 	//	return (1);
 	str = "\n\n\n\n\n\n\n!\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~";

@@ -6,7 +6,7 @@
 /*   By: ccurie <ccurie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 18:44:51 by ccurie            #+#    #+#             */
-/*   Updated: 2022/01/06 20:26:57 by ccurie           ###   ########.fr       */
+/*   Updated: 2022/01/08 22:05:53 by ccurie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,5 +145,6 @@ int	main(int argc, char *argv[])
 		return (-1);
 	argv[1] = "good\nwork\n";
 	ft_test_split(argv[1]);
+	write(1, (*((char **)&("hfvfkkfv"))), 1);
 	return (0);
 }
