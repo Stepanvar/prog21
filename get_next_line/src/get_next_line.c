@@ -1,87 +1,114 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ccurie <ccurie@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/06 12:15:58 by ccurie            #+#    #+#             */
-/*   Updated: 2022/01/09 20:00:16 by ccurie           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "fcntl.h"
 #include "stdio.h"
 #include "unistd.h"
 #include "stdlib.h"
-#include "get_next_line.h"
 
-char	*ft_onesplit(char *str, char c)
+void	ft_putstr(char *str)
 {
-	char	*buf;
+	while (*str)
+		str += write(1, str, 1);
+}
 
-	buf = ft_strchr(str, c);
-	return (buf);
+char	*ft_substr(const char *str, int start, int end)
+{
+	int	i;
+	char	*sub;
+
+	i = 0;
+	sub = (char *)malloc(end - start);
+	if (!sub)
+		return (NULL);
+	while (i < start)
+		i++;
+	while (i < end)
+		*sub = str[i++];
+	return (sub);
+}
+
+int	ft_strlen(const char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+char	*ft_strchr(const char *str, unsigned char c)
+{
+	int	i;
+
+	i = -1;
+	if (!str)
+		return (NULL);
+	if ((unsigned char) c == '\0')
+		return ((char *)&(str[ft_strlen(str)]));
+	while (*(str + ++i))
+		if ((unsigned char)*(str + i) == (unsigned char)c)
+			return ((char *)(str + i));
+	return (NULL);
+}
+
+char	*ft_strjoin(char *save, char *str)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (save[i])
+		i++;
+	while (str[j])
+	{
+		save[i + j] = str[j];
+		j++;
+	}
+	return (save);
 }
 
 char	*get_next_line(int fd)
 {
-	int			size;
-	static char	*buf = NULL;
-	char		*str;
-	int		len;
+	char	*str;
+	static char	*save = NULL;
+//	int	size;
+	int	i;
 
-	size = 0;
-	len = 0;
-	if (!buf)
+	i = 2;
+//	size = 0;
+	if (!save)
 	{
-		buf = (char *)malloc(BUFFER_SIZE + 2);
-		buf[0] = '\0';
-		size = read(fd, (++buf), BUFFER_SIZE);
-		buf[size + 1] = '\0';
+		while (!ft_strchr(save, '\n') || i == 2)
+		{
+			str = (char *)malloc(10 + 1);
+			read(fd, str, 10);
+			save = (char *)malloc((10 + 1) * i);
+			save = ft_strjoin(save, str);
+			free(str);
+			i++;
+		}
 	}
-	str = ft_substr(buf, 0, ft_strchr(buf, '\n') - buf + 1);
-	len = ft_strlen(str);
-	buf += len;
-	if ((0 == size && str[len - 1] == '\n' && !*buf))
-	{
-		while (*(buf - 1))
-			buf--;
-		free(--buf);
-		buf = NULL;
-		return (str);
-	}
-	if (!*str && !*buf)
-	{
-		buf = NULL;
-		return (NULL);
-	}
+//	save = ft_strjoin(save, str);
+	str = ft_substr(save, 0, ft_strchr(save, '\n') - save + 1);
 	return (str);
 }
 
-int	main(void)
+int main(int argc, char *argv[])
 {
-	int		fd;
-//	int		i;
+	int	fd;
+	int	i;
 	char	*str;
 
+	i = 0;
 	fd = 0;
-//	i = 0;
-//	if (1 == argc)
-//		return (-1);
-	fd = open("texts/0.txt", O_RDONLY);
-	if (-1 == fd)
+	if (1 == argc)
 		return (-1);
-	str = get_next_line(fd);
-	printf("%s", str);
-	free(str);
-//	while (str)
-//{
-//		str = get_next_line(fd);
-//		printf("%s", str);
-//		free(str);
-//		i++;
-//	}
-	close(fd);
-	return (0);
+	fd = open(argv[1], O_RDWR);
+	while (i < 1)
+	{
+		str = get_next_line(fd);
+		ft_putstr(str);
+		free(str);
+		i++;
+	}
+
 }
