@@ -40,15 +40,18 @@ char	*get_next_line(int fd)
 	}
 	str = ft_substr(buf, 0, ft_strchr(buf, '\n') - buf);
 	buf += ft_strlen(str);
-	if ((0 == size && str[ft_strlen(str) - 1] != '\n'))
+	if ((0 == size && str[ft_strlen(str) - 1] != '\n' && !*buf))
 	{
 		while (*(buf - 1))
 			buf--;
 		free(--buf);
 		buf = NULL;
-		if (!*str)
-			return (NULL);
 		return (str);
+	}
+	if (!*str && !*buf)
+	{
+		buf = NULL;
+		return (NULL);
 	}
 	return (str);
 }

@@ -40,42 +40,42 @@ char	*get_next_line(int fd)
 	}
 	str = ft_substr(buf, 0, ft_strchr(buf, '\n') - buf + 1);
 	buf += ft_strlen(str);
-	if ((0 == size && str[ft_strlen(str) - 1] != '\n'))
+	if ((0 == size && str[ft_strlen(str) - 1] == '\n' && !*buf))
 	{
 		while (*(buf - 1))
 			buf--;
 		free(--buf);
 		buf = NULL;
-		if (!*str)
-			return (NULL);
 		return (str);
 	}
+	if (!*str && !*buf)
+		return (NULL);
 	return (str);
 }
 
-// int	main(int argc, char *argv[])
-// {
-// 	int		fd;
-// 	int		i;
-// 	char	*str;
+ int	main(int argc, char *argv[])
+ {
+ 	int		fd;
+ 	int		i;
+ 	char	*str;
 
-// 	fd = 0;
-// 	i = 0;
-// 	if (1 == argc)
-// 		return (-1);
-// 	fd = open(argv[1], O_RDONLY);
-// 	if (-1 == fd)
-// 		return (-1);
-// 	str = get_next_line(fd);
-// 	printf("%s", str);
-// 	free(str);
-// 	while (str)
-// 	{
-// 		str = get_next_line(fd);
-// 		printf("%s", str);
-// 		free(str);
-// 		i++;
-// 	}
-// 	close(fd);
-// 	return (0);
-// }
+ 	fd = 0;
+ 	i = 0;
+ 	if (1 == argc)
+ 		return (-1);
+ 	fd = open(argv[1], O_RDONLY);
+ 	if (-1 == fd)
+ 		return (-1);
+ 	str = get_next_line(fd);
+ 	printf("%s", str);
+ 	free(str);
+ 	while (str)
+ 	{
+ 		str = get_next_line(fd);
+ 		printf("%s", str);
+ 		free(str);
+ 		i++;
+ 	}
+ 	close(fd);
+ 	return (0);
+ }

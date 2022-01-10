@@ -7,7 +7,7 @@ DEPS	= $(addsuffix .d, $(basename $(OBJS)))
 CFLAGS	= -Wall -Wextra -Werror -g $(BSIZE)
 BSIZE	= -D BUFFER_SIZE=42
 RM		= rm -rf
-CC		= gcc 
+CC		= clang 
 .PHONY: all
 all: $(NAME)
 $(NAME): $(OBJS)
