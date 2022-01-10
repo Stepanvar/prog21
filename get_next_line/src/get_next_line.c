@@ -29,8 +29,10 @@ char	*get_next_line(int fd)
 	int			size;
 	static char	*buf = NULL;
 	char		*str;
+	int		len;
 
 	size = 0;
+	len = 0;
 	if (!buf)
 	{
 		buf = (char *)malloc(BUFFER_SIZE + 2);
@@ -38,9 +40,10 @@ char	*get_next_line(int fd)
 		size = read(fd, (++buf), BUFFER_SIZE);
 		buf[size + 1] = '\0';
 	}
-	str = ft_substr(buf, 0, ft_strchr(buf, '\n') - buf);
-	buf += ft_strlen(str);
-	if ((0 == size && str[ft_strlen(str) - 1] != '\n' && !*buf))
+	str = ft_substr(buf, 0, ft_strchr(buf, '\n') - buf + 1);
+	len = ft_strlen(str);
+	buf += len;
+	if ((0 == size && str[len - 1] == '\n' && !*buf))
 	{
 		while (*(buf - 1))
 			buf--;
@@ -56,29 +59,29 @@ char	*get_next_line(int fd)
 	return (str);
 }
 
-int	main(int argc, char *argv[])
+int	main(void)
 {
 	int		fd;
-	int		i;
+//	int		i;
 	char	*str;
 
 	fd = 0;
-	i = 0;
-	if (1 == argc)
-		return (-1);
-	fd = open(argv[1], O_RDONLY);
+//	i = 0;
+//	if (1 == argc)
+//		return (-1);
+	fd = open("texts/0.txt", O_RDONLY);
 	if (-1 == fd)
 		return (-1);
 	str = get_next_line(fd);
 	printf("%s", str);
 	free(str);
-	while (str)
-	{
-		str = get_next_line(fd);
-		printf("%s", str);
-		free(str);
-		i++;
-	}
+//	while (str)
+//{
+//		str = get_next_line(fd);
+//		printf("%s", str);
+//		free(str);
+//		i++;
+//	}
 	close(fd);
 	return (0);
 }
