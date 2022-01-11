@@ -16,10 +16,11 @@ char	*ft_strchr(const char *s, int c)
 
 int main(void)
 {
-	char *str;
+	char *str = "\0";
 
-	str = "check \nit";
-	str = ft_strchr(str, '\n');
-	printf("%s", str);
+	printf("%d", (int)(*str));
+	//str = "check \nit";
+	//str = ft_strchr(str, '\n');
+	//printf("%s", str);
 	return (0);
 }
