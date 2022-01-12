@@ -1,4 +1,4 @@
-cd ~/prog21/get_next_line/texts
+cd texts
 #./fillfile
 rm -rf ../res.txt
 rm -rf ../diff/*.txt
@@ -8,8 +8,14 @@ cd ..
 mkdir -p diff
 touch 'diff/diff_'$var
 echo $var
-./getnl.out 'texts/'$var > 'diff/diff_'$var
+for buf in 1 6 42 9999999
+do
+make fclean
+make AFL="-D BUFFER_SIZE=$buf"
+./getnl.exe 'texts/'$var > 'diff/diff_'$var
 echo $var >> res.txt
+echo BS=$buf >> res.txt
 diff 'texts/'$var 'diff/diff_'$var >> res.txt
-cd ~/prog21/get_next_line/texts
+done
+cd texts
 done

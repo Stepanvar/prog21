@@ -1,30 +1,12 @@
-#include "stdio.h"
+#include <stdio.h>
 #include "unistd.h"
 #include "stdlib.h"
+#include "fcntl.h"
 
 void	ft_putstr(char *str)
 {
 	while (*str)
 		str += write(1, str, 1);
-}
-
-char	*ft_substr(const char *str, int start, int end)
-{
-	int	i;
-	int	j;
-	char	*sub;
-
-	i = 0;
-	j = 0;
-	sub = (char *)malloc(end - start + 1);
-	if (!sub)
-		return (NULL);
-	while (i < start)
-		i++;
-	while (i < end)
-		sub[j++] = str[i++];
-	sub[j] = '\0';
-	return (sub);
 }
 
 int	ft_strlen(const char *str)
@@ -35,6 +17,27 @@ int	ft_strlen(const char *str)
 	while (str[i])
 		i++;
 	return (i);
+}
+
+char	*ft_substr(const char *str, int start, int end)
+{
+	int	i;
+	int	j;
+	char	*sub;
+
+	i = 0;
+	j = 0;
+	sub = (char *)malloc((end - start)* sizeof(char) + 1);
+	if (!sub)
+		return (NULL);
+	if (end > ft_strlen(str))
+		end = ft_strlen(str);
+	while (i < start && str[i])
+		i++;
+	while (i < end && str[i])
+		sub[j++] = str[i++];
+	sub[j] = '\0';
+	return (sub);
 }
 
 char	*ft_strchr(const char *str, unsigned char c)
@@ -52,73 +55,74 @@ char	*ft_strchr(const char *str, unsigned char c)
 	return (NULL);
 }
 
-char	*ft_strjoin(char *save, char *str)
+char	*ft_strjoin(char *str1, char *str2)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	int		size;
+	char	*join;
 
 	i = 0;
 	j = 0;
-	while (save[i])
-		i++;
-	while (str[j])
+	size = ft_strlen(str1) + ft_strlen(str2) + 1;
+	join =(char *)malloc(size * sizeof(char) + 1);
+	while (str1[i])
 	{
-		save[i + j] = str[j];
-		j++;
-		save[i + j] = '\0';
+		join[i] = str1[i];
+		i++;
 	}
-	return (save);
+	while (str2[j])
+	{
+		join[i + j] = str2[j];
+		j++;
+	}
+	join[i + j] = '\0';
+	return (join);
+}
+
+char	*ft_get_line(char **usave, int fd)
+{
+	char	*str;
+	int		size;
+
+	size = BUFFER_SIZE;
+	if (!*usave || !ft_strchr(*usave, '\n'))
+	{
+		while (!ft_strchr(*usave, '\n') && size > 0)
+		{
+			str = (char *)malloc(BUFFER_SIZE * sizeof(char) + 1);
+			size = read(fd, str, BUFFER_SIZE);
+			str[size] = '\0';
+			*usave = ft_strjoin(*usave, str);
+			free(str);
+			str = NULL;
+		}
+	}
+	str = ft_substr(*usave, 0, ft_strchr(*usave, '\n') - *usave + 1);
+	*usave = ft_strjoin("", ft_substr(*usave, ft_strchr(*usave, '\n') - *usave + 1, ft_strlen(*usave)));
+	if (0 == size)
+	{
+		free(str);
+		free(*usave);
+		str = NULL;
+		*usave = NULL;
+		return (NULL);
+	}
+	return(str);
 }
 
 char	*get_next_line(int fd)
 {
-	char	*str;
 	static char	*save = NULL;
-	int	size;
-	int	i;
+	char		*str;
 
-	i = 1;
-	size = BUFFER_SIZE;
-	if (!save || !ft_strchr(save, '\n'))
-	{
-		while ((!ft_strchr(save, '\n') || i == 1) && size > 0)
-		{
-			str = (char *)malloc(BUFFER_SIZE * i + 1);
-			if (save)
-			{
-				str = ft_strjoin(str, save);
-				free(save);
-				*save = '\0';
-			}
-			save = (char *)malloc(BUFFER_SIZE * i + 1);
-			*save = '\0';
-			save = ft_strjoin(save, str);
-			size = read(fd, str, BUFFER_SIZE);
-			str[size] = '\0';
-			save = ft_strjoin(save, str);
-			free(str);
-			*str = '\0';
-			i++;
-		}
-	}
-	if (size <= 0)
-	{
-		free(save);
-		free(str);
-		save = NULL;
-		str = NULL;
+	if (!save)
+		save = ft_strjoin("", "");
+	str = ft_get_line(&save, fd);
+	if (!str)
 		return (NULL);
-	}
-	if (ft_strlen(save) < BUFFER_SIZE)
-	{
-		str = (char *)malloc(BUFFER_SIZE + 1);
-	}
-	str = ft_substr(save, 0, ft_strchr(save, '\n') - save + 1);
-	str[ft_strchr(save, '\n') - save + 1] = '\0';
-	save += ft_strlen(str);
 	if ((!*save))
 	{
-		save -= ft_strlen(str);
 		free(save);
 		save = NULL;
 		return (str);
@@ -144,6 +148,7 @@ int main(int argc, char *argv[])
 		if (!str)
 			return(1);
 		free(str);
+		str = NULL;
 		i++;
 	}
 	return (0);

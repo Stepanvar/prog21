@@ -16,10 +16,13 @@ char	*ft_strchr(const char *s, int c)
 
 int main(void)
 {
-	char *str = "\0";
+	int		i = 0;
+	char	*str = "\0";
 
-	printf("%d", (int)(*str));
-	//str = "check \nit";
+	//printf("%d", (int)(*str));
+	str = "check \nit";
+	while (str[i])
+		printf("%c\n", str[i++]);
 	//str = ft_strchr(str, '\n');
 	//printf("%s", str);
 	return (0);

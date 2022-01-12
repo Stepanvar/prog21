@@ -1,78 +1,200 @@
 0.txt
-6a7
-> UiXhrKrFlNuOuPANlQhTJF1h
-13,15c14
-< KlqGkJxMwhf152
-< awHN
-< msDtCxQ1eGhaeYIf5w7w5L1B8JRMoTE5JYg
----
-> KlqGkJxMsDtCxQ1eGhaeYIf5w7w5L1B8JRMoTE5JYg
-21a21
+BS=1
+21a22
+> (null)
+\ No newline at end of file
+0.txt
+BS=6
+21a22
+> (null)
+\ No newline at end of file
+0.txt
+BS=42
+21a22
+> (null)
+\ No newline at end of file
+0.txt
+BS=9999999
+21a22
 > (null)
 \ No newline at end of file
 1.txt
-4,6c4
-< P3uQEPG5JfjnrIMYujcMvKdH5xIC2YUC
-< tw
-< 1rQ
----
-> PrQ
-16a15
+BS=1
+10a11
+> (null)
+\ No newline at end of file
+1.txt
+BS=6
+10a11
+> (null)
+\ No newline at end of file
+1.txt
+BS=42
+10a11
+> (null)
+\ No newline at end of file
+1.txt
+BS=9999999
+10a11
 > (null)
 \ No newline at end of file
 2.txt
+BS=1
+32a33
+> (null)
+\ No newline at end of file
+2.txt
+BS=6
+32a33
+> (null)
+\ No newline at end of file
+2.txt
+BS=42
+32a33
+> (null)
+\ No newline at end of file
+2.txt
+BS=9999999
 32a33
 > (null)
 \ No newline at end of file
 3.txt
+BS=1
+19a20
+> (null)
+\ No newline at end of file
+3.txt
+BS=6
+19a20
+> (null)
+\ No newline at end of file
+3.txt
+BS=42
+19a20
+> (null)
+\ No newline at end of file
+3.txt
+BS=9999999
 19a20
 > (null)
 \ No newline at end of file
 4.txt
+BS=1
+20a21
+> (null)
+\ No newline at end of file
+4.txt
+BS=6
+20a21
+> (null)
+\ No newline at end of file
+4.txt
+BS=42
+20a21
+> (null)
+\ No newline at end of file
+4.txt
+BS=9999999
 20a21
 > (null)
 \ No newline at end of file
 5.txt
-4,6c4
-< TVypeO8kiVO
-< FaBiStgZ9tdafROPBk
-< BUFYmNc8pI5v2DGWdy
----
-> TV8pI5v2DGWdy
-22a21
+BS=1
+22a23
+> (null)
+\ No newline at end of file
+5.txt
+BS=6
+22a23
+> (null)
+\ No newline at end of file
+5.txt
+BS=42
+22a23
+> (null)
+\ No newline at end of file
+5.txt
+BS=9999999
+22a23
 > (null)
 \ No newline at end of file
 6.txt
+BS=1
+17a18
+> (null)
+\ No newline at end of file
+6.txt
+BS=6
+17a18
+> (null)
+\ No newline at end of file
+6.txt
+BS=42
+17a18
+> (null)
+\ No newline at end of file
+6.txt
+BS=9999999
 17a18
 > (null)
 \ No newline at end of file
 7.txt
+BS=1
+21a22
+> (null)
+\ No newline at end of file
+7.txt
+BS=6
+21a22
+> (null)
+\ No newline at end of file
+7.txt
+BS=42
+21a22
+> (null)
+\ No newline at end of file
+7.txt
+BS=9999999
 21a22
 > (null)
 \ No newline at end of file
 8.txt
-1,20d0
-< nZk
-< PyGOXYUpkO
-< IZC
-< aD
-< 4uxVXBgEvCwAH1e3I52
-< eiM5G
-< 
-< HoKe2JmB1GS3ASYoaX6ZO1Pab6Vi6Ij4J1ndmzjHT70Q
-< V4
-< RxK
-< tif
-< C
-< wSkZSBXWYUGJ
-< NRtisaOb1dwcIWFL
-< 
-< pS6MfiruCPT0
-< h6tfnYGicCJbbZm
-< V3PQQmz6WtmPmTrOmUz
-< Z8Nt4deVi
-< D0Y
+BS=1
+20a21
+> (null)
+\ No newline at end of file
+8.txt
+BS=6
+20a21
+> (null)
+\ No newline at end of file
+8.txt
+BS=42
+20a21
+> (null)
+\ No newline at end of file
+8.txt
+BS=9999999
+20a21
+> (null)
+\ No newline at end of file
 9.txt
+BS=1
+16a17
+> (null)
+\ No newline at end of file
+9.txt
+BS=6
+16a17
+> (null)
+\ No newline at end of file
+9.txt
+BS=42
+16a17
+> (null)
+\ No newline at end of file
+9.txt
+BS=9999999
 16a17
 > (null)
 \ No newline at end of file

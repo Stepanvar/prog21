@@ -1,12 +1,12 @@
-NAME	= getnl.out
+NAME	= getnl.exe
 ODIR	= ./bin
 SDIR	= ./src
 SRCS	= $(SDIR)/get_next_line.c #$(SDIR)/get_next_line_utils.c
 OBJS	= $(patsubst $(SDIR)/%.c, $(ODIR)/%.o, $(SRCS))
 DEPS	= $(addsuffix .d, $(basename $(OBJS)))
-CFLAGS	= -Wall -Wextra -Werror -g -D BUFFER_SIZE=42
+CFLAGS	= -Wall -Wextra -Werror -g $(AFL)
 RM		= rm -rf
-CC		= clang 
+CC		= /C/Users/user/gcc/bin/x86_64-w64-mingw32-gcc.exe 
 .PHONY: all
 all: $(NAME)
 $(NAME): $(OBJS)
