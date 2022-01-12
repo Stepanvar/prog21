@@ -1,4 +1,4 @@
-cd /Users/ccurie/practiceinprog/clanguage/prog21/get_next_line/texts
+cd ~/prog21/get_next_line/texts
 ./fillfile
 rm -rf ../res.txt
 rm -rf ../diff/*.txt
@@ -11,5 +11,5 @@ echo $var
 ./getnl.out 'texts/'$var > 'diff/diff_'$var
 echo $var >> res.txt
 diff 'texts/'$var 'diff/diff_'$var >> res.txt
-cd /Users/ccurie/practiceinprog/clanguage/prog21/get_next_line/texts
+cd ~/prog21/get_next_line/texts
 done

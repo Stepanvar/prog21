@@ -1,0 +1,40 @@
+0.txt
+21a22
+> (null)
+\ No newline at end of file
+1.txt
+16a17
+> (null)
+\ No newline at end of file
+2.txt
+32a33
+> (null)
+\ No newline at end of file
+3.txt
+19a20
+> (null)
+\ No newline at end of file
+4.txt
+20a21
+> (null)
+\ No newline at end of file
+5.txt
+22a23
+> (null)
+\ No newline at end of file
+6.txt
+17a18
+> (null)
+\ No newline at end of file
+7.txt
+21a22
+> (null)
+\ No newline at end of file
+8.txt
+20a21
+> (null)
+\ No newline at end of file
+9.txt
+16a17
+> (null)
+\ No newline at end of file

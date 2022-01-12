@@ -65,6 +65,7 @@ char	*ft_strjoin(char *save, char *str)
 	{
 		save[i + j] = str[j];
 		j++;
+		save[i + j] = '\0';
 	}
 	return (save);
 }
@@ -76,11 +77,11 @@ char	*get_next_line(int fd)
 	int	size;
 	int	i;
 
-	i = 2;
-	size = 0;
+	i = 1;
+	size = 1;
 	if (!save)
 	{
-		while (!ft_strchr(save, '\n') || i == 2)
+		while ((!ft_strchr(save, '\n') || i == 1) && size > 0)
 		{
 			str = (char *)malloc(1 * i + 1);
 			if (save)
@@ -89,7 +90,8 @@ char	*get_next_line(int fd)
 				free(save);
 				*save = '\0';
 			}
-			save = (char *)malloc((1 + 2) * i);
+			save = (char *)malloc(1 * i + 1);
+			*save = '\0';
 			save = ft_strjoin(save, str);
 			//free(str);
 			size = read(fd, str, 1);
@@ -100,8 +102,16 @@ char	*get_next_line(int fd)
 			i++;
 		}
 	}
+	if (size <= 0)
+	{
+		free(save);
+		free(str);
+		save = NULL;
+		str = NULL;
+		return (NULL);
+	}
 	str = ft_substr(save, 0, ft_strchr(save, '\n') - save + 1);
-	str[ft_strchr(save, '\n') - save + 2] = '\0';
+	str[ft_strchr(save, '\n') - save + 1] = '\0';
 	save += ft_strlen(str);
 	if ((!*save))
 	{
@@ -109,11 +119,6 @@ char	*get_next_line(int fd)
 		free(save);
 		save = NULL;
 		return (str);
-	}
-	if (!size)
-	{
-		save = NULL;
-		return (NULL);
 	}
 	return (str);
 }
@@ -124,18 +129,20 @@ int main(int argc, char *argv[])
 	int	i;
 	char	*str;
 
-	i = 0;
+	i = 1;
 	fd = 0;
 	if (1 == argc)
 		return (-1);
 	fd = open(argv[1], O_RDWR);
-	while (i < 2)
+	while (i)
 	{
 		str = get_next_line(fd);
-		ft_putstr(str);
+		printf("%s", str);
+		if (!str)
+			return(1);
 		free(str);
 		*str = '\0';
 		i++;
 	}
-
+	return (0);
 }
