@@ -4,7 +4,7 @@ SDIR	= ./src
 SRCS	= $(SDIR)/get_next_line.c #$(SDIR)/get_next_line_utils.c
 OBJS	= $(patsubst $(SDIR)/%.c, $(ODIR)/%.o, $(SRCS))
 DEPS	= $(addsuffix .d, $(basename $(OBJS)))
-CFLAGS	= -Wall -Wextra -Werror -g
+CFLAGS	= -Wall -Wextra -Werror -g -D BUFFER_SIZE=42
 RM		= rm -rf
 CC		= clang 
 .PHONY: all

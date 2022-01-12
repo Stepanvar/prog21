@@ -1,5 +1,5 @@
 cd ~/prog21/get_next_line/texts
-./fillfile
+#./fillfile
 rm -rf ../res.txt
 rm -rf ../diff/*.txt
 for var in $(ls *.txt)

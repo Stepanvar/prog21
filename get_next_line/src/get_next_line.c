@@ -78,23 +78,22 @@ char	*get_next_line(int fd)
 	int	i;
 
 	i = 1;
-	size = 1;
-	if (!save)
+	size = BUFFER_SIZE;
+	if (!save || !ft_strchr(save, '\n'))
 	{
 		while ((!ft_strchr(save, '\n') || i == 1) && size > 0)
 		{
-			str = (char *)malloc(1 * i + 1);
+			str = (char *)malloc(BUFFER_SIZE * i + 1);
 			if (save)
 			{
 				str = ft_strjoin(str, save);
 				free(save);
 				*save = '\0';
 			}
-			save = (char *)malloc(1 * i + 1);
+			save = (char *)malloc(BUFFER_SIZE * i + 1);
 			*save = '\0';
 			save = ft_strjoin(save, str);
-			//free(str);
-			size = read(fd, str, 1);
+			size = read(fd, str, BUFFER_SIZE);
 			str[size] = '\0';
 			save = ft_strjoin(save, str);
 			free(str);
@@ -109,6 +108,10 @@ char	*get_next_line(int fd)
 		save = NULL;
 		str = NULL;
 		return (NULL);
+	}
+	if (ft_strlen(save) < BUFFER_SIZE)
+	{
+		str = (char *)malloc(BUFFER_SIZE + 1);
 	}
 	str = ft_substr(save, 0, ft_strchr(save, '\n') - save + 1);
 	str[ft_strchr(save, '\n') - save + 1] = '\0';
@@ -141,7 +144,6 @@ int main(int argc, char *argv[])
 		if (!str)
 			return(1);
 		free(str);
-		*str = '\0';
 		i++;
 	}
 	return (0);
