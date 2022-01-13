@@ -101,9 +101,8 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias sb="source ~/.zshrc"
 alias ll="ls -Fla"
-alias tkn="cat ~/token.tkn"
 0p(){
 	git add .
 	git commit -m "$1"
-	git push https://stepanvar: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@github.com/Stepanvar/prog21.git
+	git push https://stepanvar:@github.com/Stepanvar/prog21.git
 }

@@ -1,5 +1,5 @@
 cd texts
-#./fillfile
+./fillfile
 rm -rf ../res.txt
 rm -rf ../diff/*.txt
 for var in $(ls *.txt)
