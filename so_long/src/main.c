@@ -6,7 +6,7 @@
 /*   By: ccurie <ccurie@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/09 20:49:14 by ccurie            #+#    #+#             */
-/*   Updated: 2022/02/16 21:56:58 by ccurie           ###   ########.fr       */
+/*   Updated: 2022/02/16 22:02:24 by ccurie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	main(int argc, char *argv[])
 	int		w;
 	int		h;
 	if (argc <= 0)
-		return (0);
+		return (1);
 	ft_maprender(argv, vars);
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, 1200, 1200, "Check init");
